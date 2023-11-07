@@ -1,0 +1,34 @@
+-- create table users(
+-- 	id bigserial primary key,
+-- 	email varchar(80) not null unique,
+-- 	name varchar(50) not null,
+-- 	lastname varchar(60) not null,
+-- 	phone varchar(10) not null unique,
+-- 	image varchar(255) null,
+-- 	password varchar(20) not null,
+-- 	is_vailabel boolean null,
+-- 	session_token varchar(255) null,
+-- 	created_at timestamp(0) not null,
+-- 	updated_at timestamp(0) not null
+-- );
+
+-- insert into users(
+-- 	email,
+-- 	name,
+-- 	lastname,
+-- 	phone,
+-- 	password,
+-- 	created_at,
+-- 	updated_at
+-- )
+-- values(
+-- 	'samuel@gmail.com',
+-- 	'samuel',
+-- 	'camacho',
+-- 	'4819907365',
+-- 	'samuel123',
+-- 	'2023-11-7',
+-- 	'2023-11-7'
+-- );
+
+-- select * from users;
