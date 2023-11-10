@@ -1,4 +1,4 @@
-//psql -d postgres postgres123
+//psql -d postgres postgres123 proyecto123
 
 const express = require('express');
 const app = express();
@@ -23,7 +23,7 @@ app.set('port', port);
 // llamada de rutas
 users(app);
 
-server.listen(3000, 'localhost', function(){
+server.listen(3000,'192.168.100.126'|| 'localhost', function(){
     console.log('Aplicaion de Nodejs iniciada...')
 });
 

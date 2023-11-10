@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:project/login/login_controller.dart';
+import 'package:project/pages/login/login_controller.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
