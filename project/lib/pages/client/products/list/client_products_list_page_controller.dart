@@ -5,7 +5,7 @@ class ClientProductsListPageController {
   BuildContext? context;
   SharedPref _sharedPref = SharedPref();
 
-  Future init(BuildContext context) async {
+  Future? init(BuildContext context) {
     this.context = context;
   }
 
