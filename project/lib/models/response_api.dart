@@ -7,19 +7,19 @@ String responseApiToJson(ResponseApi data) => json.encode(data.toJson());
 class ResponseApi {
     String? message;
     String? error;
-    bool? succes;
+    bool? success;
     dynamic data;
 
     ResponseApi({
         required this.message,
         required this.error,
-        required this.succes,
+        required this.success,
     });
 
     ResponseApi.fromJson(Map<String, dynamic> json) {
         message = json["message"];
         error = json["error"];
-        succes = json["succes"];
+        success = json["success"];
         try {
           data = json["data"];
         } catch (e) {
@@ -30,6 +30,7 @@ class ResponseApi {
     Map<String, dynamic> toJson() => {
         "message": message,
         "error": error,
-        "succes": succes,
+        "success": success,
+        "data": data,
     };
 }

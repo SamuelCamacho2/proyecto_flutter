@@ -19,7 +19,6 @@ class UserProvider {
   }
 
   Future<ResponseApi> create(User user)async{
-
     try {
       Uri url = Uri.http( _url, '$_api/register',);
       String bodyParams = json.encode(user);
@@ -28,7 +27,6 @@ class UserProvider {
       }; 
       final res = await http.post(url, headers: headers, body: bodyParams);
       final data = json.decode(res.body);
-
       ResponseApi responseApi = ResponseApi.fromJson(data);
       return responseApi;
     } catch (e) {
@@ -36,9 +34,32 @@ class UserProvider {
       return ResponseApi(
         message: 'Error: $e',
         error: e.toString(),
-        succes: false
+        success: false
       );
     }
-    
+  }
+
+  Future<ResponseApi> login(String email, String password) async{
+    try {
+      Uri url = Uri.http( _url, '$_api/login',);
+      String bodyParams = json.encode({
+        'email': email,
+        'password': password
+      });
+      Map<String, String> headers = {
+        'Content-type' : 'application/json'
+      }; 
+      final res = await http.post(url, headers: headers, body: bodyParams);
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
+    } catch (e) {
+      print('error: $e');
+      return ResponseApi(
+        message: 'Error: $e',
+        error: e.toString(),
+        success: false
+      );
+    }
   }
 }

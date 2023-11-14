@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/pages/client/products/list/client_products_list_page.dart';
 import 'package:project/pages/register/register.dart';
 import 'package:project/pages/login/login.dart';
 
@@ -18,6 +19,7 @@ class MainApp extends StatelessWidget {
       routes: {
         '/login' : (BuildContext context) => const Loginpage(),
         '/register' : (BuildContext context) => const RegisterPage(),
+        '/client/products/list' : (BuildContext context) => const ClientProductsListPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
