@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/models/user_model.dart';
 import 'package:project/utils/shared_pref.dart';
 
-class ClientProductsListPageController {
+class DeliveryOrdersListPageController {
   BuildContext? context;
   SharedPref _sharedPref = SharedPref();
   GlobalKey <ScaffoldState> key = GlobalKey<ScaffoldState>();
@@ -15,7 +15,6 @@ class ClientProductsListPageController {
     user = User.fromJson(await _sharedPref.read('user'));
     refresh();
   }
-
   void logout(){
     _sharedPref.logout(context!);
   }

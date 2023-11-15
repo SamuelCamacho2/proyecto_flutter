@@ -32,7 +32,7 @@ class _RolesPageState extends State<RolesPage> {
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10),
         child: ListView(
-          children: _con.user != null ? _con.user!.roles!.map((Rol rol){
+          children: _con.user != null ? _con.user!.roles!.map((Rol rol) {
             return _cardRol(rol);
           }).toList() : []
         ),
@@ -53,7 +53,7 @@ class _RolesPageState extends State<RolesPage> {
             child: FadeInImage(
               placeholder: const AssetImage('assets/img/nota.png'),
               image: rol.image != '' 
-                ? NetworkImage(rol.image)
+                ? const AssetImage('assets/img/nota.png') //NetworkImage(rol.image)
                 : const AssetImage('assets/img/nota.png') as ImageProvider,
               fit: BoxFit.contain,
               fadeInDuration: const Duration(milliseconds: 50),
@@ -65,7 +65,7 @@ class _RolesPageState extends State<RolesPage> {
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
     
         ],
       ),
