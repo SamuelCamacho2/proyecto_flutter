@@ -28,7 +28,7 @@ server.listen(3000,'192.168.100.126'|| 'localhost', function(){
 });
 
 app.use((err, req, res, next) => {
-    console.log(err+'/n');
+    console.log(err);
     res.status(err.status || 500).send(err.stack);
 });
 

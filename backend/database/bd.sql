@@ -12,6 +12,26 @@
 -- 	updated_at timestamp(0) not null
 -- );
 
+-- CREATE TABLE roles(
+-- 	id bigserial primary key,
+-- 	name varchar(80) not null unique,
+-- 	image varchar(255) null,
+-- 	route varchar(255) null,
+-- 	created_at timestamp(0) not null,
+-- 	updated_at timestamp(0) not null
+-- );
+
+-- CREATE TABLE user_has_rol(
+-- 	id_user bigserial not null,
+-- 	id_rol bigserial not null,
+-- 	created_at timestamp(0) not null,
+-- 	updated_at timestamp(0) not null,
+-- 	foreign key(id_user) references users(id) on update cascade on delete cascade,
+-- 	foreign key(id_rol) references roles(id) on update cascade on delete cascade,
+-- 	primary key(id_user,id_rol)
+
+-- );
+
 -- insert into users(
 -- 	email,
 -- 	name,

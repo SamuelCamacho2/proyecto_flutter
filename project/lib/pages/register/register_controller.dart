@@ -54,7 +54,17 @@ class RegisterController {
 
     ResponseApi responseApi = await userProvider.create(user);
     Mysnackbar.show(context!, responseApi.message.toString());
+
+    if(responseApi.success!){
+      Future.delayed(Duration(seconds: 3), (){
+        Navigator.pushReplacementNamed(context!, '/login');
+      });
+    }
     print('responseApi: ${responseApi.toJson()}');
+  }
+
+  void back(){
+    Navigator.pop(context!);
   }
 
 }
