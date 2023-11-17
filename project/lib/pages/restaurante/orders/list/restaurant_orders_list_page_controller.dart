@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/models/user_model.dart';
 import 'package:project/utils/shared_pref.dart';
 
-class ClientProductsListPageController {
+class RestaurantOrdersListPageController {
   BuildContext? context;
   SharedPref _sharedPref = SharedPref();
   GlobalKey <ScaffoldState> key = GlobalKey<ScaffoldState>();
