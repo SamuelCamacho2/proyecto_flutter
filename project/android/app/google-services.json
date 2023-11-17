@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "132708341308",
+    "project_id": "delivery-app-dd24f",
+    "storage_bucket": "delivery-app-dd24f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132708341308:android:66ff4fccf3cd52481c5539",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC52V7fuBiEpxQx_Gj1HlUHo6y9KcJbWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
