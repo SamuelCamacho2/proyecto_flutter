@@ -30,30 +30,30 @@ User.create = (user) => {
     const mypasswordhashed = crypto.createHash('md5').update(user.password).digest('hex');
     user.password = mypasswordhashed;
     
-    // const sql = `insert into users( email, name, lastname, phone, image, password, created_at, updated_at) 
-    //     values($1,$2,$3,$4,$5,$6,$7,$8) returning id`;
-    // return bd.oneOrNone(sql, [
-    //     user.email,
-    //     user.name,
-    //     user.lastname,
-    //     user.phone,
-    //     user.image,
-    //     user.password,
-    //     new Date(),
-    //     new Date()
-    // ]);
-
-    const sql = `insert into users( email, name, lastname, phone, password, created_at, updated_at) 
-        values($1,$2,$3,$4,$5,$6,$7) returning id`;
+    const sql = `insert into users( email, name, lastname, phone, image, password, created_at, updated_at) 
+        values($1,$2,$3,$4,$5,$6,$7,$8) returning id`;
     return bd.oneOrNone(sql, [
         user.email,
         user.name,
         user.lastname,
         user.phone,
+        user.image,
         user.password,
         new Date(),
         new Date()
     ]);
+
+    // const sql = `insert into users( email, name, lastname, phone, password, created_at, updated_at) 
+    //     values($1,$2,$3,$4,$5,$6,$7) returning id`;
+    // return bd.oneOrNone(sql, [
+    //     user.email,
+    //     user.name,
+    //     user.lastname,
+    //     user.phone,
+    //     user.password,
+    //     new Date(),
+    //     new Date()
+    // ]);
 };
 
 User.isPassworMatch = (canPassword, hash) =>{

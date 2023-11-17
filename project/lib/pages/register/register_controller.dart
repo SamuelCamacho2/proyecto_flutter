@@ -7,6 +7,7 @@ import 'package:project/models/response_api.dart';
 import 'package:project/models/user_model.dart';
 import 'package:project/provider/user_provider.dart';
 import 'package:project/utils/my_snackbar.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class RegisterController {
   BuildContext? context;
@@ -23,10 +24,15 @@ class RegisterController {
   File? imageFile;
   Function? refresh;
 
+  ProgressDialog? _progressDialog;
+
+  bool isEnable = true;
+
   Future? init(BuildContext context, Function refresh) {
     this.context = context;
     this.refresh = refresh;
     userProvider.init(context);
+    _progressDialog = ProgressDialog(context: context);
   }
 
   void register() async {
@@ -63,6 +69,9 @@ class RegisterController {
       return;
     }
 
+    _progressDialog!.show(max: 100, msg: 'Espere un momento');
+    isEnable = false;
+
     User user = User(
       email: email,
       name: nombre,
@@ -71,29 +80,32 @@ class RegisterController {
       password: password,
     );
 
-    // Stream? stream = await userProvider.createWithImage(user, imageFile!);
-    // stream!.listen((res) {
-    //   // ResponseApi responseApi = await userProvider.create(user);
-    //   ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
-    //   print('responseApi: ${responseApi.toJson()}');
-    //   Mysnackbar.show(context!, responseApi.message.toString());
+    Stream? stream = await userProvider.createWithImage(user, imageFile!);
+    stream!.listen((res) {
+      _progressDialog!.close();
+      // ResponseApi responseApi = await userProvider.create(user);
+      ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
+      print('responseApi: ${responseApi.toJson()}');
+      Mysnackbar.show(context!, responseApi.message.toString());
 
-    //   if (responseApi.success!) {
-    //     Future.delayed(Duration(seconds: 3), () {
-    //       Navigator.pushReplacementNamed(context!, '/login');
-    //     });
-    //   }
-    // });
+      if (responseApi.success!) {
+        Future.delayed(Duration(seconds: 3), () {
+          Navigator.pushReplacementNamed(context!, '/login');
+        });
+      } else {
+        isEnable = true;
+      }
+    });
 
-    ResponseApi responseApi = await userProvider.create(user);
-    print('responseApi: ${responseApi.toJson()}');
-    Mysnackbar.show(context!, responseApi.message.toString());
+    // ResponseApi responseApi = await userProvider.create(user);
+    // print('responseApi: ${responseApi.toJson()}');
+    // Mysnackbar.show(context!, responseApi.message.toString());
 
-    if (responseApi.success!) {
-      Future.delayed(Duration(seconds: 3), () {
-        Navigator.pushReplacementNamed(context!, '/login');
-      });
-    }
+    // if (responseApi.success!) {
+    //   Future.delayed(Duration(seconds: 3), () {
+    //     Navigator.pushReplacementNamed(context!, '/login');
+    //   });
+    // }
   }
 
   Future selectImage(ImageSource imageSource) async {

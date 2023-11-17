@@ -68,10 +68,10 @@ class _RegisterPageState extends State<RegisterPage> {
     return GestureDetector(
       onTap: _con.showAlertDialog,
       child: CircleAvatar(
-        backgroundImage: AssetImage('assets/img/user.png'),
-        // backgroundImage: _con.imageFile != null
-        //     ? FileImage(_con.imageFile!) as ImageProvider<Object>?
-        //     : AssetImage('assets/img/user.png'),
+        // backgroundImage: AssetImage('assets/img/user.png'),
+        backgroundImage: _con.imageFile != null
+            ? FileImage(_con.imageFile!) as ImageProvider<Object>?
+            : AssetImage('assets/img/user.png'),
         radius: 70,
         backgroundColor: Color.fromRGBO(174, 221, 254, 0.5),
       ),
@@ -89,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
             padding: const EdgeInsets.symmetric(
               vertical: 15,
             )),
-        onPressed: _con.register,
+        onPressed: _con.isEnable ? _con.register : null,
         child: const Text('Crear cuenta'),
       ),
     );

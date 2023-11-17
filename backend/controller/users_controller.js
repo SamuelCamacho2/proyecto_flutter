@@ -43,11 +43,11 @@ module.exports = {
 
     async registerWithImage(req, res, next){
         try {
-            const user = JSON.parse(req.body);
+            const user = JSON.parse(req.body.user);
             console.log(`Datos enviado del usuario ${user}`);
             const files = req.files;
             if(files.length > 0){
-                const pathImage = `image${Date.now}`; //NOMBRE DEL ARCHIVO 
+                const pathImage = `image_${Date.now()}`; //NOMBRE DEL ARCHIVO 
                 const url = await storage(files[0], pathImage);
 
                 if(url != undefined && url != null){
