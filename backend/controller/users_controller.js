@@ -2,6 +2,7 @@ const User = require('../models/user_model');
 const JWT = require('jsonwebtoken');
 const key = require('../config/keys');
 const Rol = require('../models/rol_model')
+const storage = require('../utils/cloud_storage');
 
 
 module.exports = {
@@ -22,6 +23,37 @@ module.exports = {
         try {
             const user = req.body;
             console.log(user)
+            const data = await User.create(user);
+            await Rol.create(data.id, 1);
+            
+            res.status(201).json({
+                success: true,
+                message: 'Usuario creado exitosamente',
+                data: data.id
+            });
+        } catch (error) {
+            console.log(`Error: ${error}`);
+            return res.status(501).json({
+                succes: false,
+                message: 'Error al registrar el usuarios',
+                error: error
+            });
+        }
+    },
+
+    async registerWithImage(req, res, next){
+        try {
+            const user = JSON.parse(req.body);
+            console.log(`Datos enviado del usuario ${user}`);
+            const files = req.files;
+            if(files.length > 0){
+                const pathImage = `image${Date.now}`; //NOMBRE DEL ARCHIVO 
+                const url = await storage(files[0], pathImage);
+
+                if(url != undefined && url != null){
+                    user.image = url;
+                }
+            }
             const data = await User.create(user);
             await Rol.create(data.id, 1);
             

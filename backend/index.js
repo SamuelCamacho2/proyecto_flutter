@@ -6,6 +6,20 @@ const http = require('http');
 const server = http.createServer(app)
 const logger = require('morgan');
 const cors = require('cors');
+const multer = require('multer');
+const admin = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
+
+/**
+ * INICIALIZAR FIREBASE ADMIN
+ */
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+})
+
+const upload = multer({
+    storage: multer.memoryStorage()
+})
 
 //rutas
 const users = require('./routes/user_routes');
@@ -21,7 +35,7 @@ app.disable('x-powered-by');
 app.set('port', port);
 
 // llamada de rutas
-users(app);
+users(app, upload);
 
 server.listen(3000,'192.168.100.17'|| 'localhost', function(){
     console.log('Aplicaion de Nodejs iniciada...')

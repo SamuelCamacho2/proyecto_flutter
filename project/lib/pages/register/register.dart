@@ -10,7 +10,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   RegisterController _con = RegisterController();
 
   @override
@@ -18,232 +17,218 @@ class _RegisterPageState extends State<RegisterPage> {
     // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      _con.init(context, refresh);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        child: Stack(
-          children: [
-            Positioned(
-              top: 65, 
-              left: 20,
-              child: _iconBack(),
-            ),
-            Positioned(
-              top: 60, 
-              left: 100,
-              child: _titulo(),
-            ),
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(top: 150),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _imageUser(),
-                    SizedBox(height: 30,),
-                    _textFielEmail(),
-                    _textFielNom(),
-                    _textFielApell(),
-                    _textFielTele(),
-                    _textFielCont(),
-                    _textFielCont2(),
-                    _buttonCrear(),
-                  ],
-                ),
+          width: double.infinity,
+          child: Stack(
+            children: [
+              Positioned(
+                top: 65,
+                left: 20,
+                child: _iconBack(),
               ),
-            )
-          ],
-        )
-            
+              Positioned(
+                top: 60,
+                left: 100,
+                child: _titulo(),
+              ),
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 150),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _imageUser(),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      _textFielEmail(),
+                      _textFielNom(),
+                      _textFielApell(),
+                      _textFielTele(),
+                      _textFielCont(),
+                      _textFielCont2(),
+                      _buttonCrear(),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          )),
+    );
+  }
+
+  Widget _imageUser() {
+    return GestureDetector(
+      onTap: _con.showAlertDialog,
+      child: CircleAvatar(
+        backgroundImage: _con.imageFile != null
+            ? FileImage(_con.imageFile!) as ImageProvider<Object>?
+            : AssetImage('assets/img/user.png'),
+        radius: 70,
+        backgroundColor: Color.fromRGBO(174, 221, 254, 0.5),
       ),
     );
   }
 
-  Widget _imageUser(){
-    return const CircleAvatar(
-      backgroundImage: AssetImage('assets/img/user.png'),
-      radius: 70,
-      backgroundColor: Color.fromRGBO(174, 221, 254, 0.5),
-    );
-  }
-
-  Widget _buttonCrear(){
+  Widget _buttonCrear() {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
-      child:  ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15,
-                  )
-                ),
-                onPressed: _con.register,
-                child: const Text('Crear cuenta'),
-              ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            padding: const EdgeInsets.symmetric(
+              vertical: 15,
+            )),
+        onPressed: _con.register,
+        child: const Text('Crear cuenta'),
+      ),
     );
   }
 
-  Widget _textFielEmail(){
+  Widget _textFielEmail() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(174, 221, 254, 0.5),
-        borderRadius: BorderRadius.circular(30)
-      ),
+          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.emailController,
         keyboardType: TextInputType.emailAddress,
-          decoration:const  InputDecoration(
+        decoration: const InputDecoration(
             hintText: 'Correo Electronico',
-            hintStyle: TextStyle(
-              color: Colors.blue
-            ),
+            hintStyle: TextStyle(color: Colors.blue),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(Icons.email_outlined)
-          ),
-        ),
+            prefixIcon: Icon(Icons.email_outlined)),
+      ),
     );
   }
 
-  Widget _textFielNom(){
+  Widget _textFielNom() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(174, 221, 254, 0.5),
-        borderRadius: BorderRadius.circular(30)
-      ),
+          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.nombreController,
-          decoration: const InputDecoration(
+        decoration: const InputDecoration(
             hintText: 'Nombre',
-            hintStyle: TextStyle(
-              color: Colors.blue
-            ),
+            hintStyle: TextStyle(color: Colors.blue),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(Icons.person)
-          ),
-        ),
+            prefixIcon: Icon(Icons.person)),
+      ),
     );
   }
 
-  Widget _textFielApell(){
+  Widget _textFielApell() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(174, 221, 254, 0.5),
-        borderRadius: BorderRadius.circular(30)
-      ),
+          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller:  _con.apellidoController,
-          decoration: const InputDecoration(
+        controller: _con.apellidoController,
+        decoration: const InputDecoration(
             hintText: 'Apellidos',
-            hintStyle: TextStyle(
-              color: Colors.blue
-            ),
+            hintStyle: TextStyle(color: Colors.blue),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(Icons.person_2_outlined)
-          ),
-        ),
+            prefixIcon: Icon(Icons.person_2_outlined)),
+      ),
     );
   }
 
-  Widget _textFielTele(){
+  Widget _textFielTele() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(174, 221, 254, 0.5),
-        borderRadius: BorderRadius.circular(30)
-      ),
+          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.telefonoController,
         keyboardType: TextInputType.phone,
-          decoration: const InputDecoration(
+        decoration: const InputDecoration(
             hintText: 'Telefono',
-            hintStyle: TextStyle(
-              color: Colors.blue
-            ),
+            hintStyle: TextStyle(color: Colors.blue),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(Icons.phone_android_outlined)
-          ),
-        ),
+            prefixIcon: Icon(Icons.phone_android_outlined)),
+      ),
     );
   }
 
-  Widget _textFielCont(){
+  Widget _textFielCont() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(174, 221, 254, 0.5),
-        borderRadius: BorderRadius.circular(30)
-      ),
+          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.passwordController,
         obscureText: true,
-          decoration: const InputDecoration(
+        decoration: const InputDecoration(
             hintText: 'Password',
-            hintStyle: TextStyle(
-              color: Colors.blue
-            ),
+            hintStyle: TextStyle(color: Colors.blue),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(Icons.password_sharp)
-          ),
-        ),
+            prefixIcon: Icon(Icons.password_sharp)),
+      ),
     );
   }
 
-  Widget _textFielCont2(){
+  Widget _textFielCont2() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(174, 221, 254, 0.5),
-        borderRadius: BorderRadius.circular(30)
-      ),
+          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.password2Controller,
         obscureText: true,
-          decoration: const InputDecoration(
+        decoration: const InputDecoration(
             hintText: 'Password',
-            hintStyle: TextStyle(
-              color: Colors.blue
-            ),
+            hintStyle: TextStyle(color: Colors.blue),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(Icons.password_sharp)
-          ),
-        ),
+            prefixIcon: Icon(Icons.password_sharp)),
+      ),
     );
   }
 
-
-  Widget _iconBack(){
+  Widget _iconBack() {
     return IconButton(
-      onPressed: (){_con.back();}, 
-      icon: const Icon(Icons.arrow_back_ios, color: Colors.blue,)
-      );
+        onPressed: () {
+          _con.back();
+        },
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          color: Colors.blue,
+        ));
   }
 
-  Widget _titulo(){
-    return  const Text(
-        'Registrate',
-        style: TextStyle(
+  Widget _titulo() {
+    return const Text(
+      'Registrate',
+      style: TextStyle(
           fontSize: 50,
           fontStyle: FontStyle.italic,
           fontWeight: FontWeight.bold,
-          color:Color.fromRGBO(29, 108, 163, 1)
-        ),
-      );
+          color: Color.fromRGBO(29, 108, 163, 1)),
+    );
+  }
+
+  void refresh() {
+    setState(() {});
   }
 }
