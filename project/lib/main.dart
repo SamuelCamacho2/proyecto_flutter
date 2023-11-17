@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/pages/client/products/list/client_products_list_page.dart';
+import 'package:project/pages/client/update/client_update.dart';
 import 'package:project/pages/delivery/oders/list/delivery_orders_list_pages.dart';
 import 'package:project/pages/register/register.dart';
 import 'package:project/pages/login/login.dart';
@@ -20,12 +21,16 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/login',
       routes: {
-        '/login' : (BuildContext context) => const Loginpage(),
-        '/register' : (BuildContext context) => const RegisterPage(),
-        '/roles' : (BuildContext context) => const RolesPage(),
-        '/client/products/list' : (BuildContext context) => const ClientProductsListPage(),
-        '/restaurante/orders/list' : (BuildContext context) => const RestaurantOrderListPage(),
-        '/delivery/orders/list' : (BuildContext context) => const DeliveryOrdersListPage(),
+        '/login': (BuildContext context) => const Loginpage(),
+        '/register': (BuildContext context) => const RegisterPage(),
+        '/roles': (BuildContext context) => const RolesPage(),
+        '/client/products/list': (BuildContext context) =>
+            const ClientProductsListPage(),
+        '/client/update': (BuildContext context) => const ClientUpdatePage(),
+        '/restaurante/orders/list': (BuildContext context) =>
+            const RestaurantOrderListPage(),
+        '/delivery/orders/list': (BuildContext context) =>
+            const DeliveryOrdersListPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

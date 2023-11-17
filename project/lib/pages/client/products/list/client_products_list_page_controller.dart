@@ -5,7 +5,7 @@ import 'package:project/utils/shared_pref.dart';
 class ClientProductsListPageController {
   BuildContext? context;
   SharedPref _sharedPref = SharedPref();
-  GlobalKey <ScaffoldState> key = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
   User? user;
   Function? refresh;
 
@@ -16,15 +16,19 @@ class ClientProductsListPageController {
     refresh();
   }
 
-  void logout(){
+  void logout() {
     _sharedPref.logout(context!);
   }
 
-  void operDrawer(){
+  void operDrawer() {
     key.currentState!.openDrawer();
   }
 
-  void goToRoles(){
+  void goToUpdatePage() {
+    Navigator.pushNamed(context!, '/client/update');
+  }
+
+  void goToRoles() {
     Navigator.pushNamedAndRemoveUntil(context!, '/roles', (route) => false);
   }
 }
