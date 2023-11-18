@@ -76,7 +76,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
             padding: const EdgeInsets.symmetric(
               vertical: 15,
             )),
-        onPressed: _con.isEnable ? _con.register : null,
+        onPressed: _con.isEnable ? _con.update : null,
         child: const Text('Actualizar Perfil'),
       ),
     );

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project/models/response_api.dart';
 import 'package:project/models/user_model.dart';
@@ -42,7 +43,7 @@ class ClientUpdateController {
     refresh();
   }
 
-  void register() async {
+  void update() async {
     String nombre = nombreController.text;
     String apellidos = apellidoController.text;
     String telefono = telefonoController.text.trim();
@@ -60,24 +61,22 @@ class ClientUpdateController {
     _progressDialog!.show(max: 100, msg: 'Espere un momento');
     isEnable = false;
 
-    User user = new User(
+    User myUser = new User(
+      id: user!.id,
       name: nombre,
       lastname: apellidos,
       phone: telefono,
     );
 
-    Stream? stream = await userProvider.createWithImage(user, imageFile!);
+    Stream? stream = await userProvider.update(myUser, imageFile!);
     stream!.listen((res) {
       _progressDialog!.close();
-      // ResponseApi responseApi = await userProvider.create(user);
-      ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
-      print('responseApi: ${responseApi.toJson()}');
-      Mysnackbar.show(context!, responseApi.message.toString());
 
+      ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
+      Fluttertoast.showToast(msg: responseApi.message.toString());
       if (responseApi.success!) {
-        Future.delayed(Duration(seconds: 3), () {
-          Navigator.pushReplacementNamed(context!, '/login');
-        });
+        Navigator.pushNamedAndRemoveUntil(
+            context!, '/client/products/list', (route) => false);
       } else {
         isEnable = true;
       }

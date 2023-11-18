@@ -8,11 +8,11 @@ User.getAll = () => {
     return bd.manyOrNone(sql);
 };
 
-User.getById = (id, callback) =>{
-    const sql =`
+User.getById = (id, callback) => {
+    const sql = `
     SELECT id, email ,name, lastname, image ,phone, password, session_token FROM users WHERE id = $1`;
-    return bd.oneOrNone(sql, id).then( user =>{ callback(null, user); });
-}   
+    return bd.oneOrNone(sql, id).then(user => { callback(null, user); });
+}
 
 User.findEmail = (email) => {
     const sql = `
@@ -29,7 +29,7 @@ User.findEmail = (email) => {
 User.create = (user) => {
     const mypasswordhashed = crypto.createHash('md5').update(user.password).digest('hex');
     user.password = mypasswordhashed;
-    
+
     const sql = `insert into users( email, name, lastname, phone, image, password, created_at, updated_at) 
         values($1,$2,$3,$4,$5,$6,$7,$8) returning id`;
     return bd.oneOrNone(sql, [
@@ -56,11 +56,25 @@ User.create = (user) => {
     // ]);
 };
 
-User.isPassworMatch = (canPassword, hash) =>{
+User.update = (user) => {
+    const sql = `UPDATE users
+                SET name = $2, lastname = $3, phone = $4, image = $5, updated_at = $6 
+                WHERE id= $1`;
+    return bd.none(sql, [
+        user.id,
+        user.name,
+        user.lastname,
+        user.phone,
+        user.image,
+        new Date()
+    ]);
+}
+
+User.isPassworMatch = (canPassword, hash) => {
     const mypasswordhashed = crypto.createHash('md5').update(canPassword).digest('hex');
     if (hash === mypasswordhashed) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
