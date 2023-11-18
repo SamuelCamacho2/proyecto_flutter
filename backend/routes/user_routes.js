@@ -3,6 +3,7 @@ const UserControlle = require('../controller/users_controller');
 // module.exports = (app) => {
 module.exports = (app, upload) => {
     app.get('/api/users/getAll', UserControlle.getAll);
+    app.get('/api/users/findId/:id', UserControlle.findId);
 
 
     //GUARDAR DATOS

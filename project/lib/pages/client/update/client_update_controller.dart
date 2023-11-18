@@ -69,12 +69,15 @@ class ClientUpdateController {
     );
 
     Stream? stream = await userProvider.update(myUser, imageFile!);
-    stream!.listen((res) {
+    stream!.listen((res) async {
       _progressDialog!.close();
 
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
       Fluttertoast.showToast(msg: responseApi.message.toString());
       if (responseApi.success!) {
+        user = await userProvider
+            .getId(myUser.id!); // obteniendo el usuario de la base de datos
+        _sharedPref.save('user', user!.toJson());
         Navigator.pushNamedAndRemoveUntil(
             context!, '/client/products/list', (route) => false);
       } else {
