@@ -71,13 +71,14 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(200, 109, 191, 248),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             padding: const EdgeInsets.symmetric(
               vertical: 15,
             )),
         onPressed: _con.isEnable ? _con.update : null,
-        child: const Text('Actualizar Perfil'),
+        child: const Text('Actualizar Perfil', style:  TextStyle(color: Colors.white),),
       ),
     );
   }

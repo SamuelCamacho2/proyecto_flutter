@@ -54,18 +54,6 @@ User.create = (user) => {
         new Date(),
         new Date()
     ]);
-
-    // const sql = `insert into users( email, name, lastname, phone, password, created_at, updated_at) 
-    //     values($1,$2,$3,$4,$5,$6,$7) returning id`;
-    // return bd.oneOrNone(sql, [
-    //     user.email,
-    //     user.name,
-    //     user.lastname,
-    //     user.phone,
-    //     user.password,
-    //     new Date(),
-    //     new Date()
-    // ]);
 };
 
 User.update = (user) => {
@@ -79,6 +67,16 @@ User.update = (user) => {
         user.phone,
         user.image,
         new Date()
+    ]);
+}
+
+User.updateToken = (id, token) => {
+    const sql = `UPDATE users
+                SET session_token = $2
+                WHERE id= $1`;
+    return bd.none(sql, [
+        id,
+        token
     ]);
 }
 

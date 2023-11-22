@@ -27,7 +27,8 @@ class _RolesPageState extends State<RolesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Selecciona un rol')
+        backgroundColor: const Color.fromARGB(200, 109, 191, 248),
+        title: const Center( child:  Text('Selecciona un Rol', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),))
       ),
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10),
@@ -49,11 +50,11 @@ class _RolesPageState extends State<RolesPage> {
       child: Column(
         children: [
           Container(
-            height: 100,
+            height: 170,
             child: FadeInImage(
               placeholder: const AssetImage('assets/img/nota.png'),
               image: rol.image != '' 
-                ? const AssetImage('assets/img/nota.png') //NetworkImage(rol.image)
+                ? NetworkImage(rol.image)
                 : const AssetImage('assets/img/nota.png') as ImageProvider,
               fit: BoxFit.contain,
               fadeInDuration: const Duration(milliseconds: 50),

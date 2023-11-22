@@ -17,11 +17,19 @@ class RestaurantOrdersListPageController {
   }
 
   void logout(){
-    _sharedPref.logout(context!);
+    _sharedPref.logout(context!, user!.id!);
   }
 
   void operDrawer(){
     key.currentState!.openDrawer();
+  }
+
+  void gotocategories(){
+    Navigator.pushNamed(context!, '/restaurant/categories/create');
+  }
+
+  void gotoproducts(){
+    Navigator.pushNamed(context!, '/restaurant/products/create');
   }
 
   void goToRoles(){

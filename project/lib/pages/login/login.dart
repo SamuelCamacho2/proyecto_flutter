@@ -85,6 +85,7 @@ class _LoginpageState extends State<Loginpage> {
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child:  ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(200, 109, 191, 248),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30)
                   ),
@@ -93,7 +94,7 @@ class _LoginpageState extends State<Loginpage> {
                   )
                 ),
                 onPressed: _con!.Login,
-                child: const Text('Iniciar Sesión'),
+                child: const Text('Iniciar Sesión', style: TextStyle(color: Colors.white),),
               ),
     );
   }

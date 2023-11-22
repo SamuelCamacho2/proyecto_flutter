@@ -33,9 +33,12 @@ class ClientUpdateController {
   Future? init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
-    userProvider.init(context);
     _progressDialog = ProgressDialog(context: context);
     user = User.fromJson(await _sharedPref.read('user'));
+    print('TOKEN : ${user!.sessionToken}');
+    print('imagen : ${user!.image}');
+    userProvider.init(context, sessionUser: user); //
+
 
     nombreController.text = user!.name;
     apellidoController.text = user!.lastname;
@@ -53,23 +56,20 @@ class ClientUpdateController {
       return;
     }
 
-    if (imageFile == null) {
-      Mysnackbar.show(context!, 'Selecciona una imagen');
-      return;
-    }
-
     _progressDialog!.show(max: 100, msg: 'Espere un momento');
     isEnable = false;
 
-    User myUser = new User(
+    User myUser = User(
       id: user!.id,
       name: nombre,
       lastname: apellidos,
       phone: telefono,
+      image: user!.image
     );
 
+    
     Stream? stream = await userProvider.update(myUser, imageFile!);
-    stream!.listen((res) async {
+    stream?.listen((res) async {
       _progressDialog!.close();
 
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
@@ -90,7 +90,7 @@ class ClientUpdateController {
     XFile? pickedFile = await ImagePicker().pickImage(source: imageSource);
     if (pickedFile != null) {
       imageFile = File(pickedFile.path);
-    }
+    } 
     Navigator.pop(context!);
     refresh!();
   }

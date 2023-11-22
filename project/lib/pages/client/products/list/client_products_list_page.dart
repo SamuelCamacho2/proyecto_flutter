@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:project/models/category.dart';
+import 'package:project/models/product_model.dart';
 import 'package:project/pages/client/products/list/client_products_list_page_controller.dart';
+import 'package:project/widget/no_data_widget.dart';
 
 class ClientProductsListPage extends StatefulWidget {
   const ClientProductsListPage({super.key});
@@ -22,16 +25,71 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _con!.key,
-      appBar: AppBar(
-        leading: _menuDrawe(),
-      ),
-      drawer: _drawe(),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: _con!.logout,
-          child: Text('Cerrar sesión'),
+    return DefaultTabController(
+      length: _con!.categories.length,
+      child: Scaffold(
+        key: _con!.key,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(157),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: const Color.fromARGB(200, 109, 191, 248),
+            actions: [
+              shopingback()
+            ],
+            flexibleSpace: Column(
+              children: [
+                const SizedBox(height: 55,),
+                _menuDrawe(),
+                const SizedBox(height: 20,),
+                _textBuscar()
+              ],
+            ),
+            bottom: TabBar(
+              indicatorColor: Colors.black,
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.grey,
+              isScrollable: true,
+              tabs: List<Widget>.generate(_con!.categories.length, (index){
+                return Container(
+                  padding: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: Text(
+                    _con!.categories[index].name ?? '', 
+                    style: const TextStyle( fontSize: 17),
+                  ),
+                );
+              }),
+            ),
+          ),
+        ),
+        drawer: _drawe(),
+        body: TabBarView(
+          children: _con!.categories.map((Categories categoria){
+            return FutureBuilder(
+              future: _con!.getProducts(categoria.id!), 
+              builder: (context, AsyncSnapshot<List<Product>> snapshot){
+                if (snapshot.hasData) {
+                  if(snapshot.data!.length > 0){
+                    return GridView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.7
+                      ), 
+                      itemCount: snapshot.data?.length ?? 0,
+                      itemBuilder: (_,index){
+                        return _cardProduct(snapshot.data![index]);
+                      }
+                    );
+                  }else{
+                    return NoDataWidget(text: 'No hay productos');
+                  }
+                }else{
+                  return NoDataWidget(text: 'No hay productos');
+                }
+              }
+            );
+          }).toList(),
         ),
       ),
     );
@@ -52,6 +110,82 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
     );
   }
 
+  Widget _cardProduct( Product producto){
+    return Container(
+      height: 250,
+      child: Card(
+        elevation: 3.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15)
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: -1,
+              right: -1.0,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(200, 109, 191, 248),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    topRight: Radius.circular(20)
+                  )
+                ),
+                child: const Icon(Icons.add, color: Colors.white,),
+              )
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 150,
+                  margin: const EdgeInsets.only(top: 20),
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  padding: const EdgeInsets.all(20),
+                  child:  FadeInImage(
+                    placeholder: const  AssetImage('assets/img/nota.png'), 
+                    image: producto.image1 != null
+                      ? NetworkImage(producto.image1!) as ImageProvider<Object>
+                      : const AssetImage('assets/img/nota.png'),
+                    fit: BoxFit.contain,
+                    fadeInDuration: const Duration(milliseconds: 50),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  height: 43,
+                  child: Text(
+                    producto.name ?? 'sin nombre',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontFamily: 'NimbusSans'
+                    ),
+                  ),
+                ),
+              const Spacer(),
+              Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  child: Text(
+                    '${producto.price ?? '--.--'}' ,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'NimbusSans'
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _drawe() {
     return Drawer(
         child: ListView(
@@ -59,7 +193,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
       children: [
         DrawerHeader(
           decoration: const BoxDecoration(
-            color: Colors.blue,
+            color: Color.fromARGB(200, 109, 191, 248),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,8 +237,8 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         ),
         ListTile(
           onTap: _con!.goToUpdatePage,
-          title: Text('Editar perfil'),
-          trailing: Icon(Icons.edit_outlined),
+          title: const Text('Editar perfil'),
+          trailing: const Icon(Icons.edit_outlined),
         ),
         const ListTile(
           title: Text('Mispedidos'),
@@ -126,6 +260,63 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         ),
       ],
     ));
+  }
+
+  Widget _textBuscar(){
+    return  Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Buscar...',
+          suffixIcon: const Icon(
+            Icons.search,
+            color: Colors.black
+          ),
+          hintStyle: const TextStyle(
+            fontSize: 17,
+            color: Colors.black
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: Colors.black
+            )
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: const BorderSide(
+              color: Colors.black
+            )
+          ),
+          contentPadding: const EdgeInsets.all(14)
+        ),
+      ),
+    );
+  }
+
+  Widget shopingback(){
+    return Stack(
+      children:[
+          Container( 
+          margin: const EdgeInsets.only(right: 15),
+          child: const Icon(
+            Icons.shopping_bag,
+            color: Colors.black,
+          ),
+        ),
+        Positioned(
+          right: 15,
+          child: Container(
+            width: 9,
+            height: 9,
+            decoration: const BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.all(Radius.circular(30))
+            ),
+          )
+        )
+      ]
+    );
   }
 
   void refresh() {

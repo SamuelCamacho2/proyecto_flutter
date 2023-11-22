@@ -52,3 +52,26 @@
 -- );
 
 -- select * from users;
+
+-- create table categories(
+-- 	id bigserial primary key,
+-- 	name varchar(180) not null,
+-- 	description varchar(255) not null,
+-- 	created_at timestamp(0) not null,
+-- 	updated_at timestamp(0) not null
+-- );
+
+-- create table products(
+-- 	id bigserial primary key,
+-- 	name varchar(180) not null unique,
+-- 	description varchar(255) not null,
+-- 	price decimal default 0,
+-- 	image1 varchar(255) null,
+-- 	image2 varchar(255) null,
+-- 	image3 varchar(255) null,
+-- 	id_categoria bigint not null,
+-- 	created_at timestamp(0) not null,
+-- 	updated_at timestamp(0) not null,
+-- 	Foreign key(id_categoria) references categories(id) 
+-- 	on update cascade on delete cascade 
+-- );

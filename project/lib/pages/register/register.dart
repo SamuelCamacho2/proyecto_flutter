@@ -84,13 +84,14 @@ class _RegisterPageState extends State<RegisterPage> {
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          primary:  Color.fromARGB(200, 109, 191, 248),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             padding: const EdgeInsets.symmetric(
               vertical: 15,
             )),
         onPressed: _con.isEnable ? _con.register : null,
-        child: const Text('Crear cuenta'),
+        child: const Text('Crear cuenta', style: TextStyle(color: Colors.white),),
       ),
     );
   }

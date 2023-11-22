@@ -96,6 +96,16 @@ class _RestaurantOrderListPageState extends State<RestaurantOrderListPage> {
               ],
             ),
           ),
+          ListTile(
+            onTap: _con.gotocategories,
+            title: const Text('Crear categoria'),
+            trailing: const Icon(Icons.list_alt),
+          ),
+          ListTile(
+            onTap: _con.gotoproducts,
+            title: const Text('Crear Producto'),
+            trailing: const Icon(Icons.production_quantity_limits),
+          ),
           _con.user != null ?
           _con.user!.roles!.length > 1 ?
           ListTile(
@@ -103,6 +113,7 @@ class _RestaurantOrderListPageState extends State<RestaurantOrderListPage> {
             title: const Text('Seleccionar rol'),
             trailing: const Icon(Icons.person_outline_outlined),
           ) : Container() : Container(),
+          
           ListTile(
             onTap: _con.logout,
             title: const Text('Cerrar sesion'),

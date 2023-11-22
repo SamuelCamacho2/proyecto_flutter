@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "132708341308",
-    "project_id": "delivery-app-dd24f",
-    "storage_bucket": "delivery-app-dd24f.appspot.com"
+    "project_number": "1081676872654",
+    "project_id": "moviles-64123",
+    "storage_bucket": "moviles-64123.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:132708341308:android:66ff4fccf3cd52481c5539",
+        "mobilesdk_app_id": "1:1081676872654:android:aa66ed842a91b3ce42099f",
         "android_client_info": {
           "package_name": "com.example.project"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBC52V7fuBiEpxQx_Gj1HlUHo6y9KcJbWs"
+          "current_key": "AIzaSyB1zlpvOosyBl84omOs2iNa4oBsu3rsL4M"
         }
       ],
       "services": {

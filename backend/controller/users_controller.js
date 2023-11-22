@@ -23,7 +23,7 @@ module.exports = {
         try {
             const id = req.params.id;
             const data = await User.findUserId(id);
-            console.log(`Usuario: ${data}`)
+            console.log(`Usuario: ${JSON.stringify(data)}`)
             return res.status(201).json(data);
         } catch (error) {
             console.log(`Error: ${error}`);
@@ -144,6 +144,9 @@ module.exports = {
                     session_token: `JWT ${token}`,
                     roles: myuser.roles
                 }
+                
+                await User.updateToken(myuser.id, `JWT ${token}`)
+
                 return res.status(201).json({
                     success: true,
                     data: data,
@@ -156,6 +159,24 @@ module.exports = {
                     message: 'Contraseña incorrecta'
                 });
             }
+        } catch (error) {
+            console.log(`Error: ${error}`);
+            return res.status(501).json({
+                succes: false,
+                message: 'Error al ingresar',
+                error: error
+            });
+        }
+    },
+
+    async logout(req, res, next){
+        try {
+            const id = req.body.id;
+            await User.updateToken(id, null)
+            return res.status(201).json({
+                success: false,
+                message: 'La sesion se ha cerrado exitosamente'
+            });
         } catch (error) {
             console.log(`Error: ${error}`);
             return res.status(501).json({
