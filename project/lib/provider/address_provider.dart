@@ -23,26 +23,29 @@ class AddressProvider {
     this.sessionUser = user;
   }
 
-  // Future<List<Categories>> getAll() async{
-  //   try {
-  //       Uri url = Uri.http(
-  //         _url,
-  //         '$_api/getAll',
-  //       );
-  //       Map<String, String> headers = {'Content-type': 'application/json', 'Authorization': sessionUser!.sessionToken!};
-  //       final res = await http2.get( url, headers: headers);
-  //       if( res.statusCode == 401){
-  //         Fluttertoast.showToast(msg: 'Sesion expirada');
-  //         SharedPref().logout(context!, sessionUser!.id!);
-  //       }
-  //       final data = json.decode(res.body);
-  //       Categories category = Categories.fromJsonList(data);
-  //       return category.toList;
-  //   } catch (e) {
-  //     print("error $e");
-  //     return[];
-  //   }
-  // }
+  Future<List<Address>> getByUser(String idUser) async {
+    try {
+      Uri url = Uri.http(
+        _url,
+        '$_api/findByUser/${idUser}',
+      );
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser!.sessionToken!
+      };
+      final res = await http2.get(url, headers: headers);
+      if (res.statusCode == 401) {
+        Fluttertoast.showToast(msg: 'Sesion expirada');
+        SharedPref().logout(context!, sessionUser!.id!);
+      }
+      final data = json.decode(res.body);
+      Address address = Address.fromJsonList(data);
+      return address.toList;
+    } catch (e) {
+      print("error $e");
+      return [];
+    }
+  }
 
   Future<ResponseApi> create(Address address) async {
     try {
