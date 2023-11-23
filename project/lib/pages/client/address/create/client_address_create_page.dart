@@ -43,6 +43,7 @@ class _ClienAddressCreatePageState extends State<ClienAddressCreatePage> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: TextField(
+        controller: _con.refPointController,
         onTap: _con.openMap,
         autofocus: false,
         focusNode: AlwaysDisabledFocusNode(),
@@ -106,9 +107,6 @@ class _ClienAddressCreatePageState extends State<ClienAddressCreatePage> {
         style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          // primary: MyColors.primaryColors
-          // colorcar
-          // el siguiente codigo
         ),
       ),
     );

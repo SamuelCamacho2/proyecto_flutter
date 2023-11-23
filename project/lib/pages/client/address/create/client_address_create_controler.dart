@@ -5,17 +5,23 @@ import 'package:project/pages/client/address/map/client_address_map_page.dart';
 class ClientAddressCreateController {
   BuildContext? context;
   Function? refresh;
+  TextEditingController? refPointController = new TextEditingController();
+  Map<String, dynamic>? refPoint;
 
   Future? init(BuildContext context, Function refresh) {
     this.context = context;
     this.refresh = refresh;
   }
 
-  void openMap() {
-    showMaterialModalBottomSheet(
+  void openMap() async {
+    refPoint = await showMaterialModalBottomSheet(
         context: context!,
         isDismissible: false,
         enableDrag: false,
         builder: (context) => ClientAddressMapPage());
+    if (refPoint != null) {
+      refPointController!.text = refPoint!['address'];
+      refresh!();
+    }
   }
 }
