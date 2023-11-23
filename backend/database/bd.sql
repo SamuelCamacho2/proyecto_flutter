@@ -75,3 +75,16 @@
 -- 	Foreign key(id_categoria) references categories(id) 
 -- 	on update cascade on delete cascade 
 -- );
+
+-- CREATE TABLE address(
+--     id BIGSERIAL PRIMARY KEY,
+--     id_user BIGINT NOT NULL,
+--     address VARCHAR(255) NOT NULL,
+--     neighborhood VARCHAR(255) NOT NULL,
+--     lat DECIMAL DEFAULT 0,
+--     lng DECIMAL DEFAULT 0,
+--     created_at TIMESTAMP(0) NOT NULL,
+--     updated_at TIMESTAMP(0) NOT NULL,
+--     FOREIGN KEY(id_user) REFERENCES users(id)  
+--     ON UPDATE cascade ON DELETE cascade 
+-- )
