@@ -17,6 +17,7 @@ dependencies:
   flutter_masked_text2: ^0.9.1
   modal_bottom_sheet: ^3.0.0-pre
   flutter_image_slideshow: ^0.1.6
+  google_maps_flutter: ^2.5.0
 
 dev_dependencies:
   flutter_test:

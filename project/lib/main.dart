@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project/pages/client/address/create/client_address_create_page.dart';
+import 'package:project/pages/client/address/list/client_address_list_page.dart';
+import 'package:project/pages/client/address/map/client_address_map_page.dart';
 import 'package:project/pages/client/orders/client_orders_create_page.dart';
 import 'package:project/pages/client/products/list/client_products_list_page.dart';
 import 'package:project/pages/client/update/client_update.dart';
@@ -27,21 +30,29 @@ class MainApp extends StatelessWidget {
         '/login': (BuildContext context) => const Loginpage(),
         '/register': (BuildContext context) => const RegisterPage(),
         '/roles': (BuildContext context) => const RolesPage(),
-
-        '/client/products/list': (BuildContext context) =>const ClientProductsListPage(),
+        '/client/products/list': (BuildContext context) =>
+            const ClientProductsListPage(),
         '/client/update': (BuildContext context) => const ClientUpdatePage(),
-        '/client/orders/create': (BuildContext context) => const ClientOrderCreatePage(),
-
-        '/restaurante/orders/list': (BuildContext context) =>const RestaurantOrderListPage(),
-        '/restaurant/categories/create': (BuildContext context) => const RestaurantCategoriesPage(),
-        '/restaurant/products/create' : (BuildContext context) => const RestaurantProductPage(),
-        
-        '/delivery/orders/list': (BuildContext context) =>const DeliveryOrdersListPage(),
+        '/client/orders/create': (BuildContext context) =>
+            const ClientOrderCreatePage(),
+        '/client/address/list': (BuildContext context) =>
+            const ClienAddressListPage(),
+        '/client/address/create': (BuildContext context) =>
+            const ClienAddressCreatePage(),
+        '/client/address/map': (BuildContext context) =>
+            const ClientAddressMapPage(),
+        '/restaurante/orders/list': (BuildContext context) =>
+            const RestaurantOrderListPage(),
+        '/restaurant/categories/create': (BuildContext context) =>
+            const RestaurantCategoriesPage(),
+        '/restaurant/products/create': (BuildContext context) =>
+            const RestaurantProductPage(),
+        '/delivery/orders/list': (BuildContext context) =>
+            const DeliveryOrdersListPage(),
       },
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(elevation: 0)
-      ),
+          primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(elevation: 0)),
     );
   }
 }

@@ -32,23 +32,23 @@ class ClientOrderCreateController {
     refresh();
   }
 
-  void getTotal(){
+  void getTotal() {
     total = 0;
-    selectedProduct.forEach((p) { 
+    selectedProduct.forEach((p) {
       total = total + (p.quantity! * p.price!.toDouble());
     });
     refresh!();
   }
 
-  void addItem(Product product){
+  void addItem(Product product) {
     int index = selectedProduct.indexWhere((p) => p.id == product.id);
     selectedProduct[index].quantity = selectedProduct[index].quantity! + 1;
     _pref.save('order', selectedProduct);
     getTotal();
   }
 
-  void removeItem(Product product){
-    if(product.quantity! > 1){
+  void removeItem(Product product) {
+    if (product.quantity! > 1) {
       int index = selectedProduct.indexWhere((p) => p.id == product.id);
       selectedProduct[index].quantity = selectedProduct[index].quantity! - 1;
       _pref.save('order', selectedProduct);
@@ -56,10 +56,13 @@ class ClientOrderCreateController {
     }
   }
 
-  void deleteItem(Product product){
+  void deleteItem(Product product) {
     selectedProduct.removeWhere((p) => p.id == product.id);
     _pref.save('order', selectedProduct);
     getTotal();
   }
-  
+
+  void goToAddress() {
+    Navigator.pushNamed(context!, '/client/address/list');
+  }
 }
