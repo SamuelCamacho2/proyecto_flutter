@@ -111,76 +111,81 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
   }
 
   Widget _cardProduct( Product producto){
-    return Container(
-      height: 250,
-      child: Card(
-        elevation: 3.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15)
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: -1,
-              right: -1.0,
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(200, 109, 191, 248),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    topRight: Radius.circular(20)
-                  )
-                ),
-                child: const Icon(Icons.add, color: Colors.white,),
+    return GestureDetector(
+      onTap: (){
+        _con!.detalle(producto);
+      },
+      child: Container(
+        height: 250,
+        child: Card(
+          elevation: 3.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15)
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                top: -1,
+                right: -1.0,
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(200, 109, 191, 248),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      topRight: Radius.circular(20)
+                    )
+                  ),
+                  child: const Icon(Icons.add, color: Colors.white,),
+                )
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 150,
+                    margin: const EdgeInsets.only(top: 20),
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    padding: const EdgeInsets.all(20),
+                    child:  FadeInImage(
+                      placeholder: const  AssetImage('assets/img/nota.png'), 
+                      image: producto.image1 != null
+                        ? NetworkImage(producto.image1!) as ImageProvider<Object>
+                        : const AssetImage('assets/img/nota.png'),
+                      fit: BoxFit.contain,
+                      fadeInDuration: const Duration(milliseconds: 50),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    height: 43,
+                    child: Text(
+                      producto.name ?? 'sin nombre',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'NimbusSans'
+                      ),
+                    ),
+                  ),
+                const Spacer(),
+                Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    child: Text(
+                      '${producto.price ?? '--.--'}' ,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'NimbusSans'
+                      ),
+                    ),
+                  ),
+                ],
               )
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 150,
-                  margin: const EdgeInsets.only(top: 20),
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  padding: const EdgeInsets.all(20),
-                  child:  FadeInImage(
-                    placeholder: const  AssetImage('assets/img/nota.png'), 
-                    image: producto.image1 != null
-                      ? NetworkImage(producto.image1!) as ImageProvider<Object>
-                      : const AssetImage('assets/img/nota.png'),
-                    fit: BoxFit.contain,
-                    fadeInDuration: const Duration(milliseconds: 50),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  height: 43,
-                  child: Text(
-                    producto.name ?? 'sin nombre',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontFamily: 'NimbusSans'
-                    ),
-                  ),
-                ),
-              const Spacer(),
-              Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  child: Text(
-                    '${producto.price ?? '--.--'}' ,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'NimbusSans'
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -295,27 +300,30 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
   }
 
   Widget shopingback(){
-    return Stack(
-      children:[
-          Container( 
-          margin: const EdgeInsets.only(right: 15),
-          child: const Icon(
-            Icons.shopping_bag,
-            color: Colors.black,
-          ),
-        ),
-        Positioned(
-          right: 15,
-          child: Container(
-            width: 9,
-            height: 9,
-            decoration: const BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.all(Radius.circular(30))
+    return GestureDetector(
+      onTap: _con!.goToCarrito,
+      child: Stack(
+        children:[
+            Container( 
+            margin: const EdgeInsets.only(right: 15),
+            child: const Icon(
+              Icons.shopping_bag,
+              color: Colors.black,
             ),
+          ),
+          Positioned(
+            right: 15,
+            child: Container(
+              width: 9,
+              height: 9,
+              decoration: const BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(30))
+              ),
+            )
           )
-        )
-      ]
+        ]
+      ),
     );
   }
 

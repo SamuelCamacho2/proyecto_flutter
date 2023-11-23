@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/pages/client/orders/client_orders_create_page.dart';
 import 'package:project/pages/client/products/list/client_products_list_page.dart';
 import 'package:project/pages/client/update/client_update.dart';
 import 'package:project/pages/delivery/oders/list/delivery_orders_list_pages.dart';
@@ -29,6 +30,7 @@ class MainApp extends StatelessWidget {
 
         '/client/products/list': (BuildContext context) =>const ClientProductsListPage(),
         '/client/update': (BuildContext context) => const ClientUpdatePage(),
+        '/client/orders/create': (BuildContext context) => const ClientOrderCreatePage(),
 
         '/restaurante/orders/list': (BuildContext context) =>const RestaurantOrderListPage(),
         '/restaurant/categories/create': (BuildContext context) => const RestaurantCategoriesPage(),

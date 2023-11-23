@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:project/models/category.dart';
 import 'package:project/models/product_model.dart';
 import 'package:project/models/user_model.dart';
@@ -33,6 +34,16 @@ class ClientProductsListPageController {
     return await _product.getProductos(idCategoty);
   }
 
+  void detalle(Product product){
+      showMaterialModalBottomSheet(
+        context: context!,
+        builder: (context) => CienteProducDetail(product: product ,),
+    );
+  }
+
+  void goToCarrito()async{
+    Navigator.pushNamed(context!, '/client/orders/create');
+  }
 
   void getCategoria()async{
     categories = await _categoryProvider.getAll();
