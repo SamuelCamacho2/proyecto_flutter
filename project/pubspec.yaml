@@ -20,7 +20,9 @@ dependencies:
   google_maps_flutter: ^2.5.0
   geolocator: ^10.1.0
   geocoding: ^2.1.1
-  # geocoder: ^1.0.0
+  flutter_credit_card: ^4.0.1
+  flutter_custom_clippers: ^2.1.0
+  # fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:

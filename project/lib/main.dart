@@ -3,6 +3,7 @@ import 'package:project/pages/client/address/create/client_address_create_page.d
 import 'package:project/pages/client/address/list/client_address_list_page.dart';
 import 'package:project/pages/client/address/map/client_address_map_page.dart';
 import 'package:project/pages/client/orders/client_orders_create_page.dart';
+import 'package:project/pages/client/payments/create/client_payments_create_page.dart';
 import 'package:project/pages/client/products/list/client_products_list_page.dart';
 import 'package:project/pages/client/update/client_update.dart';
 import 'package:project/pages/delivery/oders/list/delivery_orders_list_pages.dart';
@@ -41,6 +42,8 @@ class MainApp extends StatelessWidget {
             const ClienAddressListPage(),
         '/client/address/create': (BuildContext context) =>
             const ClienAddressCreatePage(),
+        '/client/payments/create': (BuildContext context) =>
+            ClientPaymentsCreatePage(),
         '/client/address/map': (BuildContext context) =>
             const ClientAddressMapPage(),
         '/restaurante/orders/list': (BuildContext context) =>

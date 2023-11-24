@@ -63,14 +63,14 @@ orders(app)
 
 // users(app);
 
-server.listen(3000,'192.168.100.126'|| 'localhost', function(){
-    console.log('Aplicaion de Nodejs iniciada...')
-});
-
-
-// server.listen(3000,'192.168.100.17'|| 'localhost', function(){
+// server.listen(3000,'192.168.100.126'|| 'localhost', function(){
 //     console.log('Aplicaion de Nodejs iniciada...')
 // });
+
+
+server.listen(3000,'192.168.100.17'|| 'localhost', function(){
+    console.log('Aplicaion de Nodejs iniciada...')
+});
 
 
 app.use((err, req, res, next) => {

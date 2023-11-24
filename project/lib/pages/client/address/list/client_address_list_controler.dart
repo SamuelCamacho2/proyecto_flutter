@@ -8,7 +8,7 @@ import 'package:project/provider/address_provider.dart';
 import 'package:project/provider/orden_provider.dart';
 import 'package:project/utils/shared_pref.dart';
 
-class ClientAddressListController { 
+class ClientAddressListController {
   BuildContext? context;
   Function? refresh;
   List<Address> address = [];
@@ -23,22 +23,21 @@ class ClientAddressListController {
     this.context = context;
     this.refresh = refresh;
     user = User.fromJson(await _sharedPref.read('user'));
-    
+
     _addressProvider.init(context, user!);
     _orderProvider.init(context, user!);
     refresh();
   }
 
-  void createOrden() async{
+  void createOrden() async {
     Address a = Address.fromJson(await _sharedPref.read('address') ?? {});
-    List<Product> selectedProduct = Product.fromJsonList(await _sharedPref.read('order')).toList;
-    Order order = Order(
-      idClient: user!.id,
-      idAddres: a.id,
-      productos: selectedProduct
-    );
+    List<Product> selectedProduct =
+        Product.fromJsonList(await _sharedPref.read('order')).toList;
+    Order order =
+        Order(idClient: user!.id, idAddres: a.id, productos: selectedProduct);
     ResponseApi responseApi = await _orderProvider.create(order);
     print('orden creada: ${responseApi.message}');
+    Navigator.pushNamed(context!, '/client/payments/create');
   }
 
   void handleRadioValueChange(int value) async {
