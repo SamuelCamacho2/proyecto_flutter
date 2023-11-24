@@ -12,6 +12,7 @@ import 'package:project/pages/restaurante/categories/restaurant_categories.dart'
 import 'package:project/pages/restaurante/orders/list/restaurant_orders_list_page.dart';
 import 'package:project/pages/restaurante/products/restaurant_products_create.dart';
 import 'package:project/pages/roles/roles_page.dart';
+import 'package:project/utils/utils.dart';
 
 void main() {
   runApp(const MainApp());
@@ -25,6 +26,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'App de envios',
       debugShowCheckedModeBanner: false,
+      // theme: MyTheme.lightTheme,
       initialRoute: '/login',
       routes: {
         '/login': (BuildContext context) => const Loginpage(),
@@ -50,9 +52,6 @@ class MainApp extends StatelessWidget {
         '/delivery/orders/list': (BuildContext context) =>
             const DeliveryOrdersListPage(),
       },
-      theme: ThemeData(
-          primarySwatch: Colors.blue,
-          appBarTheme: const AppBarTheme(elevation: 0)),
     );
   }
 }

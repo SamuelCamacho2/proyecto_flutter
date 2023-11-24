@@ -26,7 +26,6 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Ubica tu direccion en el mapa'),
-        backgroundColor: const Color.fromARGB(200, 109, 191, 248),
       ),
       body: Stack(
         children: [

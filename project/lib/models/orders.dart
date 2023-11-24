@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:project/models/address.dart';
 import 'package:project/models/product_model.dart';
+import 'package:project/models/user_model.dart';
 
 Order orderFromJson(String str) => Order.fromJson(json.decode(str));
 
@@ -15,8 +17,10 @@ class Order {
     double? lng;
     String? status;
     int? timestamp;
-    List<Product>? products = [];
-    List<Order>? tolist = [];
+    List<Product>? productos = [];
+    List<Order> tolist = [];
+    User? cliente;
+    Address? addres;
 
 
     Order({
@@ -28,7 +32,9 @@ class Order {
         this.lng,
         this.status,
         this.timestamp,
-        this.products
+        this.productos,
+        this.cliente,
+        this.addres
     });
 
     factory Order.fromJson(Map<String, dynamic> json) => Order(
@@ -40,8 +46,18 @@ class Order {
         lng: json["lng"] is String ? double.parse(json["lng"]) : json["lng"],
         status: json["status"],
         timestamp: json["timestamp"] is String ? int.parse(json["timestamp"]) : json["timestamp"],
-        products: List<Product>.from(json['products'].map((model) => Product.fromJson(model))) ?? [],
+        productos: json["productos"] != null ? List<Product>.from(json['productos'].map((model) => Product.fromJson(model))) : [],
+        cliente: json["cliente"] is String ? userFromJson(json["cliente"]) : User.fromJson(json["cliente"] ?? {}),
+        addres: json["address"] is String ? addressFromJson(json["address"]) : Address.fromJson(json["address"] ?? {})
     );
+
+    Order.fromjsonList(List<dynamic> jsonlist){
+      if (jsonlist == null) return;
+      jsonlist.forEach((item) { 
+        Order order = Order.fromJson(item);
+        tolist!.add(order);
+      });
+    }
 
     Map<String, dynamic> toJson() => {
         "id": id,
@@ -52,6 +68,8 @@ class Order {
         "lng": lng,
         "status": status,
         "timestamp": timestamp,
-        "products": products,
+        "productos": productos,
+        "cliente": cliente,
+        "address": addres,
     };
 }

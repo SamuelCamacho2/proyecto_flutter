@@ -27,7 +27,6 @@ class _ClienAddressListPageState extends State<ClienAddressListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Direcciones'),
-        backgroundColor: const Color.fromARGB(200, 109, 191, 248),
         actions: [_iconAdd()],
       ),
       body: Stack(

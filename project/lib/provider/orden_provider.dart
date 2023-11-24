@@ -47,4 +47,26 @@ class OrderProvider {
           message: 'Error: $e', error: e.toString(), success: false);
     }
   }
+
+  Future<List<Order>> lista( String status) async{
+    try {
+        Uri url = Uri.http(
+          _url,
+          '$_api/find/$status',
+        );
+        Map<String, String> headers = {'Content-type': 'application/json', 'Authorization': sessionUser!.sessionToken!};
+        final res = await http2.get( url, headers: headers);
+        if( res.statusCode == 401){
+          Fluttertoast.showToast(msg: 'Sesion expirada');
+          SharedPref().logout(context!, sessionUser!.id!);
+        }
+        final data = json.decode(res.body);
+        Order orden  = Order.fromjsonList(data);
+        return orden.tolist;
+    } catch (e) {
+      print("error $e");
+      return[];
+    }
+  }
+
 }

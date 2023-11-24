@@ -25,7 +25,6 @@ class _ClienAddressCreatePageState extends State<ClienAddressCreatePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Nueva Direccion'),
-        backgroundColor: const Color.fromARGB(200, 109, 191, 248),
       ),
       body: Column(
         children: [

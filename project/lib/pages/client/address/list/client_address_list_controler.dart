@@ -35,7 +35,7 @@ class ClientAddressListController {
     Order order = Order(
       idClient: user!.id,
       idAddres: a.id,
-      products: selectedProduct
+      productos: selectedProduct
     );
     ResponseApi responseApi = await _orderProvider.create(order);
     print('orden creada: ${responseApi.message}');

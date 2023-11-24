@@ -8,11 +8,9 @@ module.exports = {
         try {
             let order = req.body;
             order.status = 'PAGADO';
-            
             console.log(order);
             const data = await Order.create(order);
-
-            for (const product of order.products) {
+            for (const product of order.productos) {
                 await OrderHasProduct.create(data.id, product.id, product.quantity); 
                 
             }
@@ -26,6 +24,23 @@ module.exports = {
             return res.status(501).json({
                 success: false,
                 message: 'Hubo un error creando la orden',
+                error: error
+            });
+        }
+    },
+
+    async finbystatus(req, res, next){
+        try {
+            const status = req.params.status;
+            console.log(status);
+            const data = await Order.orden(status);
+            console.log(`${JSON.stringify(data)}`)
+            return res.status(201).json(data);
+        }catch (error){
+            console.log(`Error ${error}`);
+            return res.status(501).json({
+                success: false,
+                message: 'Hubo un error obtener la orden en estados',
                 error: error
             });
         }
