@@ -65,4 +65,26 @@ class ProductProvaider {
       return[];
     }
   }
+
+  Future<List<Product>> getProductosAndName( String idCategoria, String name ) async{
+    try {
+        Uri url = Uri.http(
+          _url,
+          '$_api/findcategoyAndProduct/$idCategoria/$name',
+        );
+        Map<String, String> headers = {'Content-type': 'application/json', 'Authorization': sessionUser!.sessionToken!};
+        final res = await http.get( url, headers: headers);
+        if( res.statusCode == 401){
+          Fluttertoast.showToast(msg: 'Sesion expirada');
+          SharedPref().logout(context!, sessionUser!.id!);
+        }
+        final data = json.decode(res.body);
+        Product product = Product.fromJsonList(data);
+        return product.toList;
+    } catch (e) {
+      print("error $e");
+      return[];
+    }
+  }
+
 }

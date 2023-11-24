@@ -8,7 +8,7 @@ import 'package:project/provider/address_provider.dart';
 import 'package:project/provider/orden_provider.dart';
 import 'package:project/utils/shared_pref.dart';
 
-class ClientAddressListController {
+class ClientAddressListController { 
   BuildContext? context;
   Function? refresh;
   List<Address> address = [];

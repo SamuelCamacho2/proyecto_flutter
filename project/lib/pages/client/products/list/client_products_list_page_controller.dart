@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:project/models/category.dart';
@@ -19,6 +21,8 @@ class ClientProductsListPageController {
   ProductProvaider _product = ProductProvaider();
 
   List<Categories> categories = [];
+  Timer? searchOnTyping ;
+  String productName = '';
 
   Future? init(BuildContext context, Function refresh) async {
     this.context = context;
@@ -29,9 +33,14 @@ class ClientProductsListPageController {
     getCategoria();
     refresh();
   }
-
-  Future<List<Product>> getProducts(String idCategoty) async{
-    return await _product.getProductos(idCategoty);
+ 
+  Future<List<Product>> getProducts(String idCategoty, String name) async{
+    if (productName.isEmpty) {
+      return await _product.getProductos(idCategoty);
+    }else{
+      return await _product.getProductosAndName(idCategoty, name);
+    }
+    
   }
 
   void detalle(Product product){
@@ -39,6 +48,20 @@ class ClientProductsListPageController {
         context: context!,
         builder: (context) => CienteProducDetail(product: product ,),
     );
+  }
+
+  void onChangeText(String text){
+    Duration duration = Duration(milliseconds: 800);
+
+    if(searchOnTyping != null){
+      searchOnTyping!.cancel();
+      refresh!();
+    }
+    searchOnTyping = Timer(duration, () { 
+      productName = text;
+      refresh!();
+      print('text: $productName');
+    });
   }
 
   void goToCarrito()async{
