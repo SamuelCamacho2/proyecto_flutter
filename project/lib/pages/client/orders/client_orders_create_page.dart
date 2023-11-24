@@ -72,7 +72,7 @@ class _ClientOrderCreatePageState extends State<ClientOrderCreatePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                product.name ?? '',
+                product.name!.length > 10 ? '${product.name?.substring(0,8)}...' : product.name ?? '',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),

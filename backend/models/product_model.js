@@ -25,4 +25,11 @@ Product.findById = (id) =>{
         return db.manyOrNone(sql, id)
 }
 
+Product.findByNameAndCateg = (id_categoria, product_name) =>{
+    const sql = `select p.id, p.name, p.description, p.price, p.image1, p.image2, p.image3, p.id_categoria
+        from products as p inner join categories as c on c.id = p.id_categoria
+        where c.id = $1 AND p.name ILIKE $2`;
+        return db.manyOrNone(sql, [id_categoria, `%${[product_name]}%`])
+}
+
 module.exports = Product; 

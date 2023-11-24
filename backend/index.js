@@ -30,6 +30,8 @@ const users = require('./routes/user_routes');
 const category = require('./routes/category_routes');
 const product = require('./routes/products_routes');
 const address = require('./routes/address_routes');
+const orders = require('./routes/order_routes');
+
 
 
 const port = process.env.PORT || 3000;
@@ -56,17 +58,19 @@ users(app, upload);
 category(app);
 address(app);
 product(app, upload)
+orders(app)
+
 
 // users(app);
 
-// server.listen(3000,'192.168.100.126'|| 'localhost', function(){
-//     console.log('Aplicaion de Nodejs iniciada...')
-// });
-
-
-server.listen(3000,'192.168.100.17'|| 'localhost', function(){
+server.listen(3000,'192.168.100.126'|| 'localhost', function(){
     console.log('Aplicaion de Nodejs iniciada...')
 });
+
+
+// server.listen(3000,'192.168.100.17'|| 'localhost', function(){
+//     console.log('Aplicaion de Nodejs iniciada...')
+// });
 
 
 app.use((err, req, res, next) => {

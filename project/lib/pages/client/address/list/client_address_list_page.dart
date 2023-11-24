@@ -41,14 +41,16 @@ class _ClienAddressListPageState extends State<ClienAddressListPage> {
   }
 
   Widget _noAddress() {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 30),
-          child: NoDataWidget(text: 'Agrega una nueva direccion'),
-        ),
-        _buttonNewAddress(),
-      ],
+    return Center(
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: NoDataWidget(text: 'Agrega una nueva direccion'),
+          ),
+          _buttonNewAddress(),
+        ],
+      ),
     );
   }
 
@@ -123,7 +125,7 @@ class _ClienAddressListPageState extends State<ClienAddressListPage> {
       width: double.infinity,
       margin: EdgeInsets.symmetric(vertical: 40, horizontal: 50),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _con.createOrden,
         child: Text('Aceptar'),
         style: ElevatedButton.styleFrom(
           shape:

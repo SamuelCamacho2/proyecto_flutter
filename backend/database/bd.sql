@@ -88,3 +88,32 @@
 --     FOREIGN KEY(id_user) REFERENCES users(id)  
 --     ON UPDATE cascade ON DELETE cascade 
 -- )
+
+-- CREATE TABLE order_has_product(
+--     id_order BIGINT NOT NULL,
+-- 	id_product BIGINT NOT NULL,
+-- 	quantity BIGINT NOT NULL,
+--     created_at TIMESTAMP(0) NOT NULL,
+--     updated_at TIMESTAMP(0) NOT NULL,
+-- 	PRIMARY key(id_order,id_product),
+--     FOREIGN KEY(id_product) REFERENCES products(id) ON UPDATE cascade ON DELETE cascade, 
+--     FOREIGN KEY(id_order) REFERENCES orders(id) ON UPDATE cascade ON DELETE cascade 	
+	
+-- )
+
+-- CREATE TABLE orders(
+--     id BIGSERIAL PRIMARY KEY,
+--     id_client BIGINT NOT NULL,
+-- 	id_delivery BIGINT NOT NULL,
+-- 	id_addres BIGINT NOT NULL,
+--     lat DECIMAL DEFAULT 0,
+--     lng DECIMAL DEFAULT 0,
+-- 	status varchar(90) not null,
+-- 	timestamp BIGINT NOT NULL,
+--     created_at TIMESTAMP(0) NOT NULL,
+--     updated_at TIMESTAMP(0) NOT NULL,
+--     FOREIGN KEY(id_client) REFERENCES users(id) ON UPDATE cascade ON DELETE cascade ,
+--     FOREIGN KEY(id_delivery) REFERENCES users(id) ON UPDATE cascade ON DELETE cascade, 
+--     FOREIGN KEY(id_addres) REFERENCES address(id) ON UPDATE cascade ON DELETE cascade 	
+	
+-- )

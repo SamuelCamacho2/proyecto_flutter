@@ -12,21 +12,21 @@ types.setTypeParser(1114, function(stringValue){
     return stringValue;
 });
 
-// const databaseConfig ={
-//     'host': '127.0.0.1',
-//     'port': 5432,
-//     'database': 'delivery_db',
-//     'user': 'postgres',
-//     'password': 'postgres123',
-// }
-
 const databaseConfig ={
     'host': '127.0.0.1',
     'port': 5432,
     'database': 'delivery_db',
     'user': 'postgres',
-    'password': '18abril2001',
+    'password': 'postgres123',
 }
+
+// const databaseConfig ={
+//     'host': '127.0.0.1',
+//     'port': 5432,
+//     'database': 'delivery_db',
+//     'user': 'postgres',
+//     'password': '18abril2001',
+// }
 
 const db = pgp(databaseConfig);
 

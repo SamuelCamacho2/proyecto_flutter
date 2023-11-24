@@ -162,7 +162,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                     height: 43,
                     child: Text(
                       producto.name ?? 'sin nombre',
-                      maxLines: 2,
+                      maxLines: 2, 
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 15,
