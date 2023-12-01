@@ -28,8 +28,8 @@ class _RolesPageState extends State<RolesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(200, 109, 191, 248),
-        title: const Center( child:  Text('Selecciona un Rol', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),))
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Center( child:  Text('Selecciona un Rol', style: TextStyle(fontSize: 30, fontFamily: 'ptsbold', color: Theme.of(context).colorScheme.tertiary),))
       ),
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10),

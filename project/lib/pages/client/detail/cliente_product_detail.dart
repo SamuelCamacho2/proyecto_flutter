@@ -48,7 +48,7 @@ class _CienteProducDetailState extends State<CienteProducDetail> {
       child: ElevatedButton(
         onPressed: _con.addToBag, 
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(200, 109, 191, 248),
+          backgroundColor: Theme.of(context).colorScheme.primary,
           padding: const EdgeInsets.symmetric(vertical: 5)
         ),
         child: Stack(

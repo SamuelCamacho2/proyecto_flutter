@@ -24,7 +24,8 @@ class _ClienAddressCreatePageState extends State<ClienAddressCreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nueva Direccion'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Center(child: Text('Nueva Direccion', style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontFamily: 'ptsbold'))),
       ),
       body: Column(
         children: [
@@ -48,6 +49,7 @@ class _ClienAddressCreatePageState extends State<ClienAddressCreatePage> {
         focusNode: AlwaysDisabledFocusNode(),
         decoration: InputDecoration(
           labelText: 'Punto de Referencia',
+          labelStyle: TextStyle(color:Theme.of(context).colorScheme.tertiary ),
           suffixIcon: Icon(
             Icons.map,
           ),
@@ -63,6 +65,7 @@ class _ClienAddressCreatePageState extends State<ClienAddressCreatePage> {
         controller: _con.neighborhoodController,
         decoration: InputDecoration(
           labelText: 'Ciudad',
+          labelStyle: TextStyle(color:Theme.of(context).colorScheme.tertiary ),
           suffixIcon: Icon(
             Icons.location_city,
           ),
@@ -78,6 +81,7 @@ class _ClienAddressCreatePageState extends State<ClienAddressCreatePage> {
         controller: _con.addressController,
         decoration: InputDecoration(
           labelText: 'Direccion',
+          labelStyle: TextStyle(color:Theme.of(context).colorScheme.tertiary ),
           suffixIcon: Icon(
             Icons.location_on,
           ),
@@ -104,8 +108,9 @@ class _ClienAddressCreatePageState extends State<ClienAddressCreatePage> {
       margin: EdgeInsets.symmetric(vertical: 40, horizontal: 50),
       child: ElevatedButton(
         onPressed: _con.createAddress,
-        child: Text('Crear Direccion'),
+        child: Text('Crear Direccion', style: TextStyle(color: Theme.of(context).colorScheme.tertiary),),
         style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).colorScheme.primary,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         ),

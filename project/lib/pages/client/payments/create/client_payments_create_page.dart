@@ -175,7 +175,7 @@ class _ClientPaymentsCreatePageState extends State<ClientPaymentsCreatePage> {
                 alignment: Alignment.center,
                 child: Text(
                   "CONTINUAR",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,  color: Colors.white),
                 ),
               ),
             ),

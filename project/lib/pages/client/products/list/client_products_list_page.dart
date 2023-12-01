@@ -3,7 +3,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:project/models/category.dart';
 import 'package:project/models/product_model.dart';
 import 'package:project/pages/client/products/list/client_products_list_page_controller.dart';
+import 'package:project/utils/globalvalues.dart';
+import 'package:project/utils/utils.dart';
 import 'package:project/widget/no_data_widget.dart';
+import 'package:day_night_switcher/day_night_switcher.dart';
+
 
 class ClientProductsListPage extends StatefulWidget {
   const ClientProductsListPage({super.key});
@@ -33,7 +37,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
           preferredSize: const Size.fromHeight(157),
           child: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: const Color.fromARGB(200, 109, 191, 248),
+            backgroundColor: Theme.of(context).colorScheme.primary,
             actions: [
               shopingback()
             ],
@@ -104,7 +108,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         child: Image.asset(
           'assets/img/more.png',
           width: 20,
-          height: 20,
+          height: 20, 
         ),
       ),
     );
@@ -128,11 +132,12 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 top: -1,
                 right: -1.0,
                 child: Container(
+                  
                   width: 40,
                   height: 40,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(200, 109, 191, 248),
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary,
+                    borderRadius:const BorderRadius.only(
                       bottomLeft: Radius.circular(15),
                       topRight: Radius.circular(20)
                     )
@@ -193,78 +198,95 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
 
   Widget _drawe() {
     return Drawer(
-        child: ListView(
-      padding: EdgeInsets.zero,
-      children: [
-        DrawerHeader(
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(200, 109, 191, 248),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${_con?.user?.name ?? ''} ${_con?.user?.lastname ?? ''}',
-                style: const TextStyle(
+        child: Container(
+          color: Theme.of(context).colorScheme.secondary,
+          child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${_con?.user?.name ?? ''} ${_con?.user?.lastname ?? ''}',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                ),
+                Text(
+                  _con?.user?.email ?? '',
+                  style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-                maxLines: 1,
-              ),
-              Text(
-                _con?.user?.email ?? '',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
+                    fontSize: 15,
+                  ),
+                  maxLines: 1,
                 ),
-                maxLines: 1,
-              ),
-              Text(
-                _con?.user?.phone ?? '',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
+                Text(
+                  _con?.user?.phone ?? '',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                  ),
+                  maxLines: 1,
                 ),
-                maxLines: 1,
-              ),
-              Container(
-                height: 60,
-                margin: const EdgeInsets.only(top: 10),
-                child: const FadeInImage(
-                  image: AssetImage('assets/img/nota.png'),
-                  fit: BoxFit.contain,
-                  fadeInDuration: Duration(milliseconds: 50),
-                  placeholder: AssetImage('assets/img/nota.png'),
-                ),
-              )
-            ],
+                Container(
+                  height: 60,
+                  margin: const EdgeInsets.only(top: 1),
+                  child: FadeInImage(
+                    placeholder: const AssetImage('assets/img/nota.png'),
+                    image: _con?.user?.image != null 
+                    ? NetworkImage(_con!.user!.image!)  as ImageProvider<Object>
+                    : const AssetImage('assets/img/nota.png'),
+                    fit: BoxFit.contain,
+                    fadeInDuration: Duration(milliseconds: 50),
+                    // placeholder: AssetImage('assets/img/nota.png'),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-        ListTile(
-          onTap: _con!.goToUpdatePage,
-          title: const Text('Editar perfil'),
-          trailing: const Icon(Icons.edit_outlined),
-        ),
-        const ListTile(
-          title: Text('Mispedidos'),
-          trailing: Icon(Icons.shopping_cart_outlined),
-        ),
-        _con!.user != null
-            ? _con!.user!.roles!.length > 1
-                ? ListTile(
-                    onTap: _con!.goToRoles,
-                    title: const Text('Seleccionar rol'),
-                    trailing: const Icon(Icons.person_outline_outlined),
-                  )
-                : Container()
-            : Container(),
-        ListTile(
-          onTap: _con!.logout,
-          title: const Text('Cerrar sesion'),
-          trailing: const Icon(Icons.logout_outlined),
-        ),
-      ],
-    ));
+          
+          ListTile(
+            onTap: _con!.goToUpdatePage,
+            title:  Text('Editar perfil', style: TextStyle(color:Theme.of(context).colorScheme.tertiary),),
+            trailing: const Icon(Icons.edit_outlined),
+          ),
+           ListTile(
+            title: Text('Mispedidos', style: TextStyle(color:Theme.of(context).colorScheme.tertiary),),
+            trailing: const  Icon(Icons.shopping_cart_outlined),
+          ),
+          
+          _con!.user != null
+              ? _con!.user!.roles!.length > 1
+                  ? ListTile(
+                      onTap: _con!.goToRoles,
+                      title: Text('Seleccionar rol', style: TextStyle(color:Theme.of(context).colorScheme.tertiary),),
+                      trailing: const Icon(Icons.person_outline_outlined),
+                    )
+                  : Container()
+              : Container(),
+          
+              DayNightSwitcher(
+                  isDarkModeEnabled: GlobalValues.flagTheme.value,
+                  onStateChanged: (isDarkModeEnabled){
+                    GlobalValues.flagTheme.value = isDarkModeEnabled;
+                    GlobalValues().saveValue(isDarkModeEnabled);
+                  },
+                ),
+          ListTile(
+            onTap: _con!.logout,
+            title: Text('Cerrar sesion', style: TextStyle(color:Theme.of(context).colorScheme.tertiary),),
+            trailing: const Icon(Icons.logout_outlined),
+          ),
+          
+                ],
+              ),
+        ));
   }
 
   Widget _textBuscar(){

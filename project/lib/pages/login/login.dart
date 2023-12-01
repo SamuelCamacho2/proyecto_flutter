@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:project/firebase/auth.dart';
 import 'package:project/pages/login/login_controller.dart';
 
 class Loginpage extends StatefulWidget {
@@ -11,7 +12,7 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   LoginController? _con = LoginController();
-
+  // final emailAuth = new EmailAuth();
   @override
   void initState() {
     // TODO: implement initState
@@ -21,9 +22,42 @@ class _LoginpageState extends State<Loginpage> {
       _con!.init(context);
     });
   }
+  
 
   @override
   Widget build(BuildContext context) {
+    // TextEditingController txtConUser = TextEditingController();
+    // TextEditingController txtConPass = TextEditingController();
+
+    // final btnEntrar = FloatingActionButton.extended(
+    //   icon: Icon(Icons.login),
+    //   label: Text('Entrar'),
+      
+    //   backgroundColor: Color.fromARGB(255, 12, 144, 221),
+    //   onPressed: () async {
+    //     bool res = await emailAuth.validateUser(emailUser: txtConUser.text, pwdUser: txtConPass.text);
+    //     if(txtConUser!=null && txtConPass!=null){
+    //      showDialog(context: context, 
+    //       builder: (BuildContext context){
+    //         return AlertDialog(
+    //           title: Text('Error \n - Los campos no pueden estar vacíos \n - Correo o Contraseña Incorrectos', style: TextStyle(fontSize: 10),),
+    //           icon: Icon(Icons.warning),
+    //           actions: [
+    //           Align(
+    //               child: ElevatedButton(onPressed: (){
+    //                 Navigator.of(context).pop();
+    //               }, child: Text('Aceptar'),),
+    //             ),
+                
+    //           ],
+    //         );
+    //       } );
+    //     }if(res){
+    //       Navigator.pushNamed(context, '/client/products/list');
+    //     }
+        
+    //   },
+    // );
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -37,7 +71,38 @@ class _LoginpageState extends State<Loginpage> {
               _buttonLogin(),
               _socialLoginButtons(),
               _textNoCuenta(),
-              _noPassword()
+              _noPassword(),
+              // TextField(
+              //   enableInteractiveSelection: false,
+              //   decoration: InputDecoration(
+              //     hintText: 'Correo',
+              //     labelText: 'Correo',
+              //     suffix: Icon(
+              //       Icons.verified_user
+              //     ) ,
+              //     border: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(20.0)
+              //     )
+              //   ),
+              //   controller: txtConUser,
+              // ),
+              // Divider(height: 30),
+              // TextField(
+              //   enableInteractiveSelection: false,
+              //   decoration: InputDecoration(
+              //     hintText: 'Contraseña',
+              //     labelText: 'Contraseña',
+              //     suffix: Icon(
+              //       Icons.password
+              //     ),
+              //     border: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(20.0)
+              //     )
+              //   ),
+              //   controller: txtConPass,
+              //   obscureText: true,
+              // ),
+              
             ],
           ),
         ),
@@ -54,7 +119,7 @@ class _LoginpageState extends State<Loginpage> {
             child: Container(
               margin: EdgeInsets.only(top: 20),
               child: const Text('Recuperar Contraseña',
-                  style: TextStyle(color: Color.fromRGBO(29, 108, 163, 1))),
+                  style: TextStyle(color: Color.fromRGBO(29, 108, 163, 1),  fontFamily: 'ptsbold')),
             ))
       ],
     );
@@ -106,8 +171,7 @@ class _LoginpageState extends State<Loginpage> {
         'Inicio de sesion',
         style: TextStyle(
             fontSize: 50,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold,
+            fontFamily: 'ptsbold',
             color: Color.fromRGBO(29, 108, 163, 1)),
       ),
     );
@@ -121,7 +185,7 @@ class _LoginpageState extends State<Loginpage> {
             onTap: _con!.goToRegister,
             child: const Text('Crear cuenta',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontFamily: 'ptsbold',
                     color: Color.fromRGBO(29, 108, 163, 1))))
       ],
     );
@@ -142,7 +206,7 @@ class _LoginpageState extends State<Loginpage> {
         onPressed: _con!.Login,
         child: const Text(
           'Iniciar Sesión',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontFamily: 'ptsbold'),
         ),
       ),
     );

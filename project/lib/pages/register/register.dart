@@ -91,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
               vertical: 15,
             )),
         onPressed: _con.isEnable ? _con.register : null,
-        child: const Text('Crear cuenta', style: TextStyle(color: Colors.white),),
+        child: const Text('Crear cuenta', style: TextStyle(color: Colors.white, fontFamily: 'ptsbold'), ),
       ),
     );
   }
@@ -224,8 +224,7 @@ class _RegisterPageState extends State<RegisterPage> {
       'Registrate',
       style: TextStyle(
           fontSize: 50,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.bold,
+          fontFamily: 'ptsbold',
           color: Color.fromRGBO(29, 108, 163, 1)),
     );
   }

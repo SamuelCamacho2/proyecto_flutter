@@ -24,7 +24,11 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Editar Perfil')),
+      appBar: AppBar(
+      title: Center(child: Text('Editar Perfil', style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontFamily: 'ptsbold'),)),
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      
+      ),
       body: Container(
         width: double.infinity,
         child: SingleChildScrollView(
@@ -71,7 +75,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Color.fromARGB(200, 109, 191, 248),
+            primary: Theme.of(context).colorScheme.primary,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             padding: const EdgeInsets.symmetric(
@@ -87,7 +91,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.nombreController,
@@ -105,7 +109,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.apellidoController,
@@ -123,7 +127,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
-          color: const Color.fromRGBO(174, 221, 254, 0.5),
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: _con.telefonoController,
@@ -133,7 +137,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
             hintStyle: TextStyle(color: Colors.blue),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(Icons.phone_android_outlined)),
+            prefixIcon: Icon(Icons.phone_android_outlined,),),
       ),
     );
   }

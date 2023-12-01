@@ -27,13 +27,13 @@ class _ClientOrderCreatePageState extends State<ClientOrderCreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: const Color.fromARGB(200, 109, 191, 248),
+            backgroundColor: Theme.of(context).colorScheme.primary,
             title: const Center(
                 child: Text(
               'Mi orden',
               style: TextStyle(
                   fontSize: 25,
-                  fontWeight: FontWeight.w500,
+                  fontFamily: 'ptsbold',
                   color: Colors.white),
             ))),
         bottomNavigationBar: Container(
@@ -94,7 +94,7 @@ class _ClientOrderCreatePageState extends State<ClientOrderCreatePage> {
       child: ElevatedButton(
           onPressed: _con.goToAddress,
           style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(200, 109, 191, 248),
+              backgroundColor: Theme.of(context).colorScheme.primary,
               padding: const EdgeInsets.symmetric(vertical: 5)),
           child: Stack(
             children: [
@@ -174,9 +174,9 @@ class _ClientOrderCreatePageState extends State<ClientOrderCreatePage> {
       width: 90,
       height: 90,
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          color: const Color.fromARGB(255, 222, 241, 255)),
+      decoration:  BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          color: Theme.of(context).colorScheme.primary,),
       child: FadeInImage(
         placeholder: const AssetImage('assets/img/nota.png'),
         image: product.image1 != null
@@ -197,17 +197,17 @@ class _ClientOrderCreatePageState extends State<ClientOrderCreatePage> {
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
+            decoration:  BoxDecoration(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
-              color: Color.fromARGB(255, 222, 241, 255),
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: const Text('-'),
           ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-          color: const Color.fromARGB(255, 222, 241, 255),
+          color: Theme.of(context).colorScheme.primary,
           child: Text('${product.quantity ?? 0}'),
         ),
         GestureDetector(
@@ -216,11 +216,11 @@ class _ClientOrderCreatePageState extends State<ClientOrderCreatePage> {
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
+            decoration:  BoxDecoration(
+              borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(8),
                   bottomRight: Radius.circular(8)),
-              color: Color.fromARGB(255, 222, 241, 255),
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: const Text('+'),
           ),

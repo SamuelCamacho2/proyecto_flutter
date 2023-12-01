@@ -26,13 +26,23 @@ class _ClienAddressListPageState extends State<ClienAddressListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Direcciones'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: const Center(
+          child:  Text(
+            'Direcciones',
+            style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'ptsbold',
+                    color: Colors.white),
+          ),
+        ),
+        
         actions: [_iconAdd()],
       ),
       body: Stack(
         children: [
           Positioned(top: 0, child: _textSelectAddress()),
-          Container(margin: EdgeInsets.only(top: 75), child: _listAddress())
+          Container(margin: const EdgeInsets.only(top: 75), child: _listAddress())
         ],
       ),
       bottomNavigationBar: _buttonAccept(),
@@ -44,7 +54,7 @@ class _ClienAddressListPageState extends State<ClienAddressListPage> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 30),
+            margin: const EdgeInsets.only(top: 30),
             child: NoDataWidget(text: 'Agrega una nueva direccion'),
           ),
           _buttonNewAddress(),
@@ -115,7 +125,7 @@ class _ClienAddressListPageState extends State<ClienAddressListPage> {
       child: ElevatedButton(
           onPressed: _con.goToNewAddress,
           child: Text('Nueva Direccion'),
-          style: ElevatedButton.styleFrom(primary: Colors.blue)),
+          style: ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.primary,)),
     );
   }
 
@@ -125,10 +135,12 @@ class _ClienAddressListPageState extends State<ClienAddressListPage> {
       margin: EdgeInsets.symmetric(vertical: 40, horizontal: 50),
       child: ElevatedButton(
         onPressed: _con.createOrden,
-        child: Text('Aceptar'),
+      
+        child: Text('Aceptar', style: TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              backgroundColor: Theme.of(context).colorScheme.primary,
         ),
       ),
     );
